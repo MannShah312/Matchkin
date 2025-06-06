@@ -73,7 +73,13 @@ router.post('/verify-otp', async (req, res) => {
 
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
-    res.json({ message: 'OTP verified. Account activated.', token });
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    });
+res.json({ message: 'OTP verified. Account activated.' });
+
   } catch (err) {
     res.status(401).json({ error: err.message });
   }
@@ -97,14 +103,21 @@ router.post('/login', async (req, res) => {
       expiresIn: '7d',
     });
 
-    res.json({ message: 'Login successful', token,
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    });
+    res.json({
+      message: 'Login successful',
       user: {
         _id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,
       }
-     });
+    });
+
   } catch (err) {
     console.error('Login error:', err.message);
     res.status(500).json({ error: 'Server error' });

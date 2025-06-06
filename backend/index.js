@@ -258,12 +258,10 @@ const matchingRoutes = require("./routes/matching");
 const chatRoutes = require("./routes/chat");
 const messageRoutes = require("./routes/message");
 const statsRoutes = require("./routes/stats");
-
 const app = express();
 const server = http.createServer(app);
 
 // Middleware
-app.use(cors());
 app.use(express.json());
 app.use(passport.initialize());
 
@@ -305,6 +303,12 @@ app.use("/stats", statsRoutes);
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
+
+
+app.use(cors({
+  origin: "https://your-frontend.onrender.com",  // exact frontend URL
+  credentials: true                               // ⬅️ Required for cookies
+}));
 
 // Socket.IO setup
 const io = require("socket.io")(server, {

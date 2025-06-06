@@ -15,6 +15,9 @@ const Navbar = () => {
 
       {/* Center: Menu */}
       <div className="hidden md:flex bg-gray-500 bg-opacity-30 px-6 py-2 rounded-xl space-x-8 text-white text-sm font-medium">
+        {/* <a href="#home" className="hover:text-yellow-300">Home</a>
+        <a href="#about" className="hover:text-yellow-300">About</a>
+        <a href="#services" className="hover:text-yellow-300">Services</a> */}
         <a href="#home" className="hover:text-yellow-300">Home</a>
         <a href="#about" className="hover:text-yellow-300">About</a>
         <a href="#services" className="hover:text-yellow-300">Services</a>
